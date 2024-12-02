@@ -1,0 +1,23 @@
+
+cat /dev/fortytwo
+
+echo "ccattano" > /dev/fortytwo
+
+sudo insmod device_forty_two.ko
+sudo rmmod device_forty_two
+
+❯ sudo dmesg -W
+[ 6870.378137] Misc device initialized Minor number: 255
+[ 6886.262695] User wrote the correct login, returning count 9
+[ 6892.327126] User wrote the correct login, returning count 11
+[ 6896.501130] User wrote the correct login, returning count 14
+[ 6899.962250] User wrote the correct login, returning count 9
+[ 6903.042063] User wrote the correct login, returning count 9
+[ 6904.469940] User wrote the correct login, returning count 9
+[ 6905.156625] User wrote the correct login, returning count 9
+[ 6905.565233] User wrote the correct login, returning count 9
+[ 6914.057740] Cleaning up module...
+[ 6974.342294] Misc device initialized Minor number: 255
+[ 6980.446794] User wrote the correct login, returning count 9
+[ 6989.827073] User wrote the correct login, returning count 9
+[ 6993.484173] Cleaning up module...
