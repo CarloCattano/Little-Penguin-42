@@ -1,0 +1,13 @@
+.cache
+compile_commands.json
+tags
+*.swp
+.vscode
+*.o
+*.out
+*.tar
+*.tar.gz
+*.tar.xz
+*.tar.bz2
+
+

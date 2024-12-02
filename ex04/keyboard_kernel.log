@@ -1,0 +1,17 @@
+[   61.343469] usb 3-7: USB disconnect, device number 5
+[   61.343660] MYUSB DRIVER: Disconnecting device
+[   64.780922] usb 3-7: new full-speed USB device number 6 using xhci_hcd
+[   64.913704] usb 3-7: New USB device found, idVendor=19f5, idProduct=3246, bcdDevice= 1.12
+[   64.913737] usb 3-7: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[   64.913749] usb 3-7: Product: NuPhy Air75 V2
+[   64.913758] usb 3-7: Manufacturer: NuPhy
+[   64.918732] MYUSB DRIVER: USB Detector: Probing device (Vendor: 0000, Product: 0000)
+[   64.920172] hid-generic 0003:19F5:3246.0005: hiddev96,hidraw1: USB HID v1.11 Device [NuPhy NuPhy Air75 V2] on usb-0000:00:14.0-7/input1
+[   64.921633] input: NuPhy NuPhy Air75 V2 Mouse as /devices/pci0000:00/0000:00:14.0/usb3/3-7/3-7:1.2/0003:19F5:3246.0006/input/input26
+[   64.922083] input: NuPhy NuPhy Air75 V2 System Control as /devices/pci0000:00/0000:00:14.0/usb3/3-7/3-7:1.2/0003:19F5:3246.0006/input/input27
+[   64.975057] input: NuPhy NuPhy Air75 V2 Consumer Control as /devices/pci0000:00/0000:00:14.0/usb3/3-7/3-7:1.2/0003:19F5:3246.0006/input/input28
+[   64.975679] input: NuPhy NuPhy Air75 V2 Keyboard as /devices/pci0000:00/0000:00:14.0/usb3/3-7/3-7:1.2/0003:19F5:3246.0006/input/input29
+[   65.082492] hid-generic 0003:19F5:3246.0006: input,hidraw2: USB HID v1.11 Mouse [NuPhy NuPhy Air75 V2] on usb-0000:00:14.0-7/input2
+[   65.085055] hid-generic 0003:19F5:3246.0007: hiddev97,hidraw3: USB HID v1.11 Device [NuPhy NuPhy Air75 V2] on usb-0000:00:14.0-7/input3
+[   72.532322] usb 3-7: USB disconnect, device number 6
+[   72.532508] MYUSB DRIVER: Disconnecting device
