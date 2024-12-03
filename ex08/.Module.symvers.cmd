@@ -1,1 +1,0 @@
-savedcmd_/home/carlo/42/lfs/little_penguin/ex08/Module.symvers :=  scripts/mod/modpost -M  -a    -N  -o /home/carlo/42/lfs/little_penguin/ex08/Module.symvers -n -T /home/carlo/42/lfs/little_penguin/ex08/modules.order -i Module.symvers -e 

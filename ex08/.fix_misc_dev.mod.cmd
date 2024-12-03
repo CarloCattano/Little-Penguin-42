@@ -1,1 +1,0 @@
-savedcmd_/home/carlo/42/lfs/little_penguin/ex08/fix_misc_dev.mod := printf '%s\n'   fix_misc_dev.o | awk '!x[$$0]++ { print("/home/carlo/42/lfs/little_penguin/ex08/"$$0) }' > /home/carlo/42/lfs/little_penguin/ex08/fix_misc_dev.mod
