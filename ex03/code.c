@@ -16,7 +16,6 @@ int do_work(int *my_int, int retval)
 		pr_info("We slept a long time!");
 	z = x * y;
 	return z;
-	return 1;
 }
 
 int my_init(void)

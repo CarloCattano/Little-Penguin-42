@@ -1,4 +1,4 @@
-obj-m += hellokernel.o
+obj-m += fortytwo.o
 
 all:
 	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
