@@ -35,7 +35,7 @@ static ssize_t misc_write(struct file *filp, const char __user *buf,
   if (strncmp(user_msg, "ccattano", 8) != 0)
     return -EINVAL; // Invalid input
 
-  printk(KERN_INFO "User wrote the correct login, returning count %d\n", count);
+  printk(KERN_INFO "User wrote the correct login, returning count %zu\n", count);
   return count;
 }
 

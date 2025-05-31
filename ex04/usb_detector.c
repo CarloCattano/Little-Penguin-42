@@ -2,6 +2,11 @@
 #include <linux/usb.h>
 #include <linux/hid.h>
 
+int usb_drv_probe(struct usb_interface *intf, const struct usb_device_id *id);
+void usb_drv_disconnect(struct usb_interface *intf);
+int usb_dry_init(void);
+void usb_dry_exit(void);
+
 const struct usb_device_id usb_drv_id_table[] = {
 	{ USB_INTERFACE_INFO(
 		USB_INTERFACE_CLASS_HID, USB_INTERFACE_SUBCLASS_BOOT,
