@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-#include <linux/init.h>
-#include <linux/module.h>
-#include <linux/kernel.h>
-#include <linux/debugfs.h>
-#include <linux/uaccess.h>
-#include <linux/jiffies.h>
-#include <linux/slab.h>
-#include <linux/mutex.h>
-=======
 #include <linux/debugfs.h>
 #include <linux/init.h>
 #include <linux/jiffies.h>
@@ -16,7 +6,6 @@
 #include <linux/mutex.h>
 #include <linux/slab.h>
 #include <linux/uaccess.h>
->>>>>>> 6e073ae376375d2ab652cb61f549b1e095db2ecd
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Carlo Cattano");
@@ -38,35 +27,6 @@ static struct dentry *id_file, *jiffies_file, *foo_file;
 
 // ===== ID FILE (read/write by anyone, validation as before) =====
 
-<<<<<<< HEAD
-static ssize_t id_read(struct file *f, char __user *buf, size_t len, loff_t *off) {
-    return simple_read_from_buffer(buf, len, off, login, login_len);
-}
-
-//static const size_t login_len = sizeof(login) - 1; 
-
-static ssize_t id_write(struct file *f, const char __user *buf, size_t len, loff_t *off) {
-	char user_msg[16];
-	
-	if (len >= sizeof(user_msg))
-		return -EINVAL;
-	
-	if (copy_from_user(user_msg, buf, len))
-		return -EFAULT;
-	
-	user_msg[len] = '\0';
-	
-	if (len != login_len)
-		return -EINVAL;
-	
-	if (strncmp(user_msg, login, login_len) != 0)
-		return -EINVAL; 
-	
-	pr_info("User wrote the correct login, returning count %zu\n", len);
-	return len;
-}
-						   
-=======
 static ssize_t id_read(struct file *f, char __user *buf, size_t len,
                        loff_t *off) {
   return simple_read_from_buffer(buf, len, off, login, login_len);
@@ -95,7 +55,6 @@ static ssize_t id_write(struct file *f, const char __user *buf, size_t len,
   pr_info("User wrote the correct login, returning count %zu\n", len);
   return len;
 }
->>>>>>> 6e073ae376375d2ab652cb61f549b1e095db2ecd
 
 static const struct file_operations id_fops = {
     .owner = THIS_MODULE,
@@ -105,18 +64,11 @@ static const struct file_operations id_fops = {
 
 // ===== JIFFIES FILE (read-only) =====
 
-<<<<<<< HEAD
-static ssize_t jiffies_read(struct file *f, char __user *buf, size_t len, loff_t *off) {
-    char tmp[32];
-    int written = snprintf(tmp, sizeof(tmp), "%lu\n", jiffies);
-    return simple_read_from_buffer(buf, len, off, tmp, written);
-=======
 static ssize_t jiffies_read(struct file *f, char __user *buf, size_t len,
                             loff_t *off) {
   char tmp[32];
   int written = snprintf(tmp, sizeof(tmp), "%lu\n", jiffies);
   return simple_read_from_buffer(buf, len, off, tmp, written);
->>>>>>> 6e073ae376375d2ab652cb61f549b1e095db2ecd
 }
 
 static const struct file_operations jiffies_fops = {
@@ -126,34 +78,6 @@ static const struct file_operations jiffies_fops = {
 
 // ===== FOO FILE (root-write, all-read) =====
 
-<<<<<<< HEAD
-static ssize_t foo_read(struct file *f, char __user *buf, size_t len, loff_t *off) {
-    ssize_t ret;
-
-    if (mutex_lock_interruptible(&foo_mutex))
-        return -ERESTARTSYS;
-
-    ret = simple_read_from_buffer(buf, len, off, foo_buf, foo_len);
-
-    mutex_unlock(&foo_mutex);
-    return ret;
-}
-
-static ssize_t foo_write(struct file *f, const char __user *buf, size_t len, loff_t *off) {
-    if (!capable(CAP_SYS_ADMIN)) return -EACCES;
-    if (len > BUF_SIZE) return -EINVAL;
-
-    if (mutex_lock_interruptible(&foo_mutex)) return -ERESTARTSYS;
-
-    foo_len = len;
-    if (copy_from_user(foo_buf, buf, len)) {
-        mutex_unlock(&foo_mutex);
-        return -EFAULT;
-    }
-
-    mutex_unlock(&foo_mutex);
-    return len;
-=======
 static ssize_t foo_read(struct file *f, char __user *buf, size_t len,
                         loff_t *off) {
   ssize_t ret;
@@ -185,7 +109,6 @@ static ssize_t foo_write(struct file *f, const char __user *buf, size_t len,
 
   mutex_unlock(&foo_mutex);
   return len;
->>>>>>> 6e073ae376375d2ab652cb61f549b1e095db2ecd
 }
 
 static const struct file_operations foo_fops = {
@@ -197,27 +120,6 @@ static const struct file_operations foo_fops = {
 // ===== MODULE INIT & EXIT =====
 
 static int __init fortytwo_init(void) {
-<<<<<<< HEAD
-    debugfs_dir = debugfs_create_dir("fortytwo", NULL);
-    if (!debugfs_dir) return -ENOMEM;
-
-    id_file = debugfs_create_file("id", 0666, debugfs_dir, NULL, &id_fops);
-    jiffies_file = debugfs_create_file("jiffies", 0444, debugfs_dir, NULL, &jiffies_fops);
-    foo_file = debugfs_create_file("foo", 0644, debugfs_dir, NULL, &foo_fops);
-
-    if (!id_file || !jiffies_file || !foo_file) {
-        debugfs_remove_recursive(debugfs_dir);
-        return -ENOMEM;
-    }
-
-    pr_info("fortytwo debugfs module loaded.\n");
-    return 0;
-}
-
-static void __exit fortytwo_exit(void) {
-    debugfs_remove_recursive(debugfs_dir);
-    pr_info("fortytwo debugfs module unloaded.\n");
-=======
   debugfs_dir = debugfs_create_dir("fortytwo", NULL);
   if (!debugfs_dir)
     return -ENOMEM;
@@ -239,12 +141,7 @@ static void __exit fortytwo_exit(void) {
 static void __exit fortytwo_exit(void) {
   debugfs_remove_recursive(debugfs_dir);
   pr_info("fortytwo debugfs module unloaded.\n");
->>>>>>> 6e073ae376375d2ab652cb61f549b1e095db2ecd
 }
 
 module_init(fortytwo_init);
 module_exit(fortytwo_exit);
-<<<<<<< HEAD
-
-=======
->>>>>>> 6e073ae376375d2ab652cb61f549b1e095db2ecd
