@@ -1,0 +1,11 @@
+/usr/src/linux (master ???) ??? git remote -v
+/usr/src/linux (master ???) ??? git remote -v
+origin  git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git (fetch)
+origin  git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git (push)
+
+# uname -a
+Linux Kattbox 6.15.0-g0f70f5b08a47 #1 SMP PREEMPT_DYNAMIC Sat May 31 13:21:23 CEST 2025 x86_64 GNU/Linux
+
+[ 0.056785] Booting paravirtualized kernel on KVM 
+[ 0.065455] Unknown kernel command line parameters "BOOT_IMAGE=/vmlinuz-torvalds-git-linux", will be passed to user space.
+[ 1.110756] Freeing unused kernel image (initmem) memory: 2764K 
