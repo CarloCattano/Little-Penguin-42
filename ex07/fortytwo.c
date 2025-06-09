@@ -36,26 +36,31 @@ static ssize_t id_read(struct file *f, char __user *buf, size_t len,
 // static const size_t login_len = sizeof(login) - 1;
 
 static ssize_t id_write(struct file *f, const char __user *buf, size_t len,
-			loff_t *off)
+                        loff_t *off)
 {
-	char user_msg[16];
+    char user_msg[16];
 
-	if (len >= sizeof(user_msg))
-		return -EINVAL;
+    if (len == 0 || len >= sizeof(user_msg))
+        return -EINVAL;
 
-	if (copy_from_user(user_msg, buf, len))
-		return -EFAULT;
+    size_t copy_len = min(len, sizeof(user_msg) - 1);
+    if (copy_from_user(user_msg, buf, copy_len))
+        return -EFAULT;
 
-	user_msg[len] = '\0';
+    user_msg[copy_len] = '\0';  // null-terminate no matter what
 
-	if (len != login_len)
-		return -EINVAL;
+    if (copy_len > 0 && user_msg[copy_len - 1] == '\n') {
+        user_msg[--copy_len] = '\0';
+    }
 
-	if (strncmp(user_msg, login, login_len) != 0)
-		return -EINVAL;
+    if (copy_len != login_len)
+        return -EINVAL;
 
-	pr_info("User wrote the correct login, returning count %zu\n", len);
-	return len;
+    if (strncmp(user_msg, login, login_len) != 0)
+        return -EINVAL;
+
+    pr_info("id_write: user correctly wrote '%s'\n", user_msg);
+    return len;
 }
 
 static const struct file_operations id_fops = {
