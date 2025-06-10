@@ -8,7 +8,7 @@ MODULE_AUTHOR("Carlo Cattano");
 MODULE_DESCRIPTION("Misc char device example ex05");
 
 static char *message = "ccattano";
-static int message_length = 9;
+static int message_length = sizeof(message);
 
 static ssize_t misc_read(struct file *filp, char __user *buf, size_t count,
 			 loff_t *f_pos)
@@ -22,20 +22,23 @@ static ssize_t misc_write(struct file *filp, const char __user *buf,
 {
 	char user_msg[16];
 
-	// Validate count to avoid buffer overflow
-	if (count >= sizeof(user_msg))
+	if (count >= sizeof(user_msg) || count == 0)
 		return -EINVAL;
 
-	// Copy data from user space to kernel space
+	size_t copy_len = min(count, message_length);
 	if (copy_from_user(user_msg, buf, count))
 		return -EFAULT;
 
-	user_msg[count] = '\0';
+	user_msg[copy_len] = '\0';
 
-	if (strlen(user_msg) != 9)
+	if (copy_len > 0 && user_msg[copy_len - 1] == '\n') {
+		user_msg[--copy_len] = '\0';
+	}
+
+	if (strlen(user_msg) != message_length)
 		return -EINVAL;
 
-	if (strncmp(user_msg, "ccattano", 8) != 0)
+	if (strncmp(user_msg, "ccattano", message_length + 1) != 0)
 		return -EINVAL; // Invalid input
 
 	printk(KERN_INFO "User wrote the correct login, returning count %zu\n",
