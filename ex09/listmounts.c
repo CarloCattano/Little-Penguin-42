@@ -23,7 +23,6 @@ static int mymounts_show(struct seq_file *m, void *v)
 	loff_t pos = 0;
 	ssize_t read_bytes;
 
-	// Open /proc/self/mounts
 	file = filp_open(MOUNTS_PATH, O_RDONLY, 0);
 	if (IS_ERR(file)) {
 		pr_err("Failed to open %s: %ld\n", MOUNTS_PATH, PTR_ERR(file));

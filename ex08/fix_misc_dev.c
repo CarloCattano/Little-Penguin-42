@@ -6,7 +6,6 @@
 #include <linux/slab.h>
 #include <linux/uaccess.h> // Required for copy_from_user
 
-// fixed license to GPL
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Louis Solofrizzo <louis@ne02ptzero.me>");
 MODULE_DESCRIPTION("Useless module");
